@@ -19,7 +19,7 @@ console.log(
 
 console.log(
     "Cadáver lateral:",
-    typeof mapaCadaverTelencefaloLateral
+    typeof mapaCadaverSulcosTelencefaloLateral
 );
 
 
@@ -41,7 +41,7 @@ const catalogoMapas = [
             "Telencéfalo — Vista Lateral",
 
         imagem:
-            "imagens/PalcoTelencefalo.png",
+            "../imagens/PalcoTelencefalo.png",
 
         estruturas:
             mapaTelencefaloLateral
@@ -60,7 +60,7 @@ const catalogoMapas = [
             "Telencéfalo — Vista Medial",
 
         imagem:
-            "imagens/PalcoTelencefaloMedial.png",
+            "../imagens/PalcoTelencefaloMedial.png",
 
         estruturas:
             mapaTelencefaloMedial
@@ -68,7 +68,7 @@ const catalogoMapas = [
 
 
     // ==================================================
-    // CADÁVER — TELENCÉFALO LATERAL
+    // CADÁVER — SULCOS TELENCÉFALO LATERAL
     // ==================================================
 
     {
@@ -79,10 +79,10 @@ const catalogoMapas = [
             "Sulcos Telencéfalo — Vista Lateral",
 
         imagem:
-            "imagens/CadaverTelencefaloLateral.png",
+            "../imagens/CadaverTelencefaloLateral.png",
 
         estruturas:
-            mapaCadaverTelencefaloLateral
+            mapaCadaverSulcosTelencefaloLateral
     }
 
 ];
@@ -112,7 +112,7 @@ console.log(
 
 console.log(
     "Qtd cadáver lateral:",
-    mapaCadaverTelencefaloLateral.length
+    mapaCadaverSulcosTelencefaloLateral.length
 );
 
 
