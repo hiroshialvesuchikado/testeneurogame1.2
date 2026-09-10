@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NeuroGame</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="game">
+
+        <h1>
+    NeuroGame
+    <div
+    id="acoesPartida"
+    class="acoes-partida"
+>
+
+    <button
+        id="reiniciarPartida"
+        type="button"
+        class="botao-acao"
+    >
+        🔄 Reiniciar partida
+    </button>
+
+
+    <button
+        id="voltarMenu"
+        type="button"
+        class="botao-acao"
+    >
+        ← Voltar ao menu
+    </button>
+
+</div>
+</h1>
+
+
+<h2 id="pergunta">
+    Preparando jogo...
+</h2>
+
+
+<!-- PAINEL -->
+
+<div class="painel">
+
+    <span>
+        Pontos:
+        <strong id="pontos">
+            0
+        </strong>
+    </span>
+
+
+    <span>
+        Questão:
+
+        <strong id="numeroQuestao">
+            1
+        </strong>
+
+        /
+
+        <strong id="totalQuestoes">
+            0
+        </strong>
+    </span>
+
+
+    <span>
+        Erros:
+
+        <strong id="erros">
+            0
+        </strong>
+    </span>
+
+</div>
+
+
+<!-- FEEDBACK -->
+
+<p id="feedback"></p>
+<div
+    id="areaDigitar"
+    class="area-digitar"
+>
+
+    <input
+        id="respostaDigitada"
+        type="text"
+        placeholder="Digite o nome da estrutura"
+        autocomplete="off"
+    >
+
+    <button
+        id="confirmarResposta"
+        type="button"
+    >
+        Responder
+    </button>
+
+</div>
+
+<!-- INFORMAÇÃO DA ESTRUTURA -->
+
+<div
+    id="infoEstrutura"
+    class="info-estrutura"
+>
+</div>
+
+
+<!-- IMAGEM -->
+
+<div class="cerebro">
+
+    <img
+        id="imagemAnatomica"
+        alt="Imagem anatômica"
+    >
+
+    <svg
+        id="camadaHotspots"
+        class="hotspots"
+    >
+    </svg>
+
+</div>
+
+
+
+
+
+
+<!-- VERIFICADOR DE DADOS-->
+
+<div id="painelAnalytics" class="painel-analytics">
+    <h3>📊 Analytics — Debug</h3>
+
+<div id="listaAnalytics">
+
+    <p id="mensagemAnalytics">
+        Nenhum registro ainda.
+    </p>
+
+</div>
+</div>
+    </main>
+
+<script src="js/analytics.js"></script>
+
+<script src="Mapas/mapaPalcoTelencefalo.js"></script>
+<script src="Mapas/mapaPalcoTelencefaloMedial.js"></script>
+<script src="../Mapas/mapaCadaverSulcosTelencefaloLateral.js"></script>
+
+<script src="Mapas/catalogoMapas.js"></script>
+
+<script src="js/modoClicar.js"></script>
+<script src="js/modoDigitar.js"></script>
+<script src="js/game.js"></script>
+    <div class="cerebro">
+
+    <img
+        id="imagemAnatomica"
+        alt="Imagem anatômica"
+    >
+
+    <svg
+        id="camadaHotspots"
+        class="hotspots"
+    >
+    </svg>
+
+</div>
+</body>
+</html>
+
+
+

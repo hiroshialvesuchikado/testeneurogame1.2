@@ -1,0 +1,586 @@
+/* ======================================================
+   NEUROGAME — STYLE.CSS
+   ====================================================== */
+
+/* =========================
+   BASE
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
+    color: #222;
+}
+
+/* ======================================================
+   MENU DE MAPAS / ATLAS
+   ====================================================== */
+
+.menu-mapas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   CARDS DE MAPA E ATLAS
+   ========================= */
+
+.card-mapa,
+.card-atlas {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-mapa img,
+.card-atlas img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.card-mapa span,
+.card-atlas span {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .card-mapa:hover,
+    .card-atlas:hover {
+        transform: translateY(-4px);
+        border-color: #777;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.card-mapa.selecionado,
+.card-atlas.selecionado {
+    border-color: #222;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 900px) {
+    .menu-mapas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================
+   CELULAR
+   ========================= */
+
+@media (max-width: 500px) {
+    body {
+        padding: 12px;
+    }
+
+    .menu-mapas {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+}
+
+/* ======================================================
+   MENU DE MODOS
+   ====================================================== */
+
+.menu-modos {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.menu-modos.visivel {
+    display: block;
+}
+
+.botao-modo {
+    margin: 10px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* ======================================================
+   ÁREA DO JOGO
+   ====================================================== */
+
+.game {
+    text-align: center;
+}
+
+/* =========================
+   IMAGEM ANATÔMICA + SVG
+   ========================= */
+
+.cerebro {
+    position: relative;
+    width: 713px;
+    max-width: 100%;
+    margin: 20px auto;
+}
+
+.cerebro img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* =========================
+   CAMADA SVG
+   ========================= */
+
+.hotspots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ======================================================
+   ESTRUTURAS DO JOGO
+   ====================================================== */
+
+.estrutura-area {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.estrutura-linha {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 24;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+    pointer-events: stroke;
+}
+
+/* =========================
+   HOVER SOMENTE NO MODO CLICAR
+   ========================= */
+
+@media (hover: hover) and (pointer: fine) {
+    .modo-clicar .estrutura-area:hover {
+        fill: rgba(255, 215, 0, 0.35);
+        stroke: #222;
+        stroke-width: 2;
+    }
+
+    .modo-clicar .estrutura-linha:hover {
+        fill: none;
+        stroke: rgba(255, 215, 0, 0.85);
+        stroke-width: 24;
+    }
+}
+
+/* =========================
+   ACERTO / ERRO — ÁREA
+   ========================= */
+
+.estrutura-area.correto {
+    fill: rgba(0, 200, 0, 0.35);
+    stroke: green;
+    stroke-width: 2;
+}
+
+.estrutura-area.errado {
+    fill: rgba(255, 0, 0, 0.35);
+    stroke: red;
+    stroke-width: 2;
+}
+
+/* =========================
+   ACERTO / ERRO — LINHA
+   ========================= */
+
+.estrutura-linha.correto {
+    fill: none;
+    stroke: green;
+    stroke-width: 24;
+}
+
+.estrutura-linha.errado {
+    fill: none;
+    stroke: red;
+    stroke-width: 24;
+}
+
+/* =========================
+   DESTAQUE MODO DIGITAR
+   ========================= */
+
+.estrutura-area.destacada {
+    fill: rgba(255, 215, 0, 0.45);
+    stroke: #222;
+    stroke-width: 20;
+    pointer-events: none;
+}
+
+.estrutura-linha.destacada {
+    fill: none;
+    stroke: rgba(255, 215, 0, 0.9);
+    stroke-width: 24;
+    pointer-events: none;
+}
+
+/* =========================
+   CURSOR POR MODO
+   ========================= */
+
+.modo-clicar .estrutura-area,
+.modo-clicar .estrutura-linha {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.modo-digitar .estrutura-area,
+.modo-digitar .estrutura-linha {
+    cursor: default;
+}
+
+/* ======================================================
+   BOTÕES DA PARTIDA
+   ====================================================== */
+
+.acoes-partida {
+    display: none;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px auto;
+    flex-wrap: wrap;
+}
+
+.acoes-partida.visivel {
+    display: flex;
+}
+
+.botao-acao {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .botao-acao:hover {
+        opacity: 0.85;
+    }
+}
+
+/* ======================================================
+   MODO DIGITAR
+   ====================================================== */
+
+.area-digitar {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+}
+
+.area-digitar.visivel {
+    display: flex;
+}
+
+.area-digitar input {
+    width: 300px;
+    max-width: 90%;
+    padding: 12px;
+    font-size: 17px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+}
+
+.area-digitar button {
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+}
+
+/* ======================================================
+   ANALYTICS
+   ====================================================== */
+
+.painel-analytics {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 1000px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.painel-analytics h3 {
+    margin-top: 0;
+}
+
+.registro-analytics {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-family: monospace;
+    font-size: 14px;
+    overflow-x: auto;
+}
+
+.registro-analytics.acerto {
+    border-left: 5px solid green;
+}
+
+.registro-analytics.erro {
+    border-left: 5px solid red;
+}
+
+/* ======================================================
+   MODO PROVA
+   ====================================================== */
+
+.card-prova {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    text-align: center;
+    background: #f7f7f7;
+}
+
+.card-prova input,
+.card-prova select {
+    display: block;
+    width: 100%;
+    margin: 10px 0 18px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+}
+
+.card-prova button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ======================================================
+   ATLAS INTERATIVO
+   ====================================================== */
+
+.info-atlas {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f7f7f7;
+    font-size: 18px;
+}
+
+.info-atlas strong {
+    margin-left: 8px;
+}
+
+/* =========================
+   ATLAS — ÁREA
+   ========================= */
+
+.estrutura-atlas.estrutura-area {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+/* =========================
+   ATLAS — LINHA
+   ========================= */
+
+.estrutura-atlas.estrutura-linha {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 24;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+    pointer-events: stroke;
+}
+
+/* =========================
+   HOVER DO ATLAS
+   ========================= */
+
+@media (hover: hover) and (pointer: fine) {
+    .estrutura-atlas.estrutura-area:hover {
+        fill: rgba(255, 215, 0, 0.30);
+        stroke: #222;
+        stroke-width: 2;
+    }
+
+    .estrutura-atlas.estrutura-linha:hover {
+        stroke: rgba(255, 215, 0, 0.8);
+        stroke-width: 24;
+    }
+}
+
+/* =========================
+   ESTRUTURA SELECIONADA
+   ========================= */
+
+.estrutura-atlas.estrutura-area.selecionada-atlas {
+    fill: rgba(0, 150, 255, 0.35);
+    stroke: #0066aa;
+    stroke-width: 2;
+}
+
+.estrutura-atlas.estrutura-linha.selecionada-atlas {
+    fill: none;
+    stroke: #0066aa;
+    stroke-width: 24;
+}
+
+.acoes-atlas {
+    margin: 25px auto;
+}
+
+/* ======================================================
+   MENU PRINCIPAL
+   ====================================================== */
+
+.menu-principal {
+    text-align: center;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.menu-principal h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.menu-principal > p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* =========================
+   OPÇÕES PRINCIPAIS
+   ========================= */
+
+.opcoes-principais {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.opcao-principal {
+    min-height: 260px;
+    padding: 30px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .opcao-principal:hover {
+        transform: translateY(-6px);
+        border-color: #555;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.icone-principal {
+    font-size: 60px;
+}
+
+.opcao-principal strong {
+    font-size: 28px;
+}
+
+.opcao-principal small {
+    font-size: 15px;
+    color: #666;
+    max-width: 240px;
+}
+
+/* =========================
+   MOBILE — MENU PRINCIPAL
+   ========================= */
+
+@media (max-width: 600px) {
+    .menu-principal {
+        margin: 30px auto;
+        padding: 10px;
+    }
+
+    .menu-principal h1 {
+        font-size: 34px;
+    }
+
+    .opcoes-principais {
+        grid-template-columns: 1fr;
+    }
+
+    .opcao-principal {
+        min-height: 210px;
+        padding: 24px;
+    }
+}

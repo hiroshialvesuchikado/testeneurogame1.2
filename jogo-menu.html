@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NeuroGame</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<main class="game">
+
+
+    <!-- ==========================
+         TÍTULO
+         ========================== -->
+
+    <h1>
+        NeuroGame
+    </h1>
+
+
+    <!-- ==========================
+         ESCOLHA DO MAPA
+         ========================== -->
+
+    <h2 id="pergunta">
+        Escolha seu mapa
+    </h2>
+
+
+    <div class="menu-mapas">
+
+
+        <!-- TELENCÉFALO LATERAL -->
+
+        <button
+            class="card-mapa"
+            data-mapa="telencefalo-lateral"
+            type="button"
+        >
+
+            <img
+                src="imagens/PalcoTelencefalo.png"
+                alt="Telencéfalo lateral"
+            >
+
+            <span>
+                Telencéfalo — Vista Lateral
+            </span>
+
+        </button>
+
+
+        <!-- TELENCÉFALO MEDIAL -->
+
+        <button
+            class="card-mapa"
+            data-mapa="telencefalo-medial"
+            type="button"
+        >
+
+            <img
+                src="imagens/PalcoTelencefaloMedial.png"
+                alt="Telencéfalo medial"
+            >
+
+            <span>
+                Telencéfalo — Vista Medial
+            </span>
+
+        </button>
+
+ <!-- CADÁVER — SULCOS DO TELENCÉFALO LATERAL -->
+
+<button
+    class="card-mapa"
+    data-mapa="cadavertelencefalo-lateral"
+    type="button"
+>
+
+    <img
+        src="imagens/CadaverTelencefaloLateral.png"
+        alt="Sulcos do Telencéfalo em cadáver"
+    >
+
+    <span>
+        Sulcos Telencéfalo — Vista Lateral
+    </span>
+
+</button>
+
+
+    </div>
+
+
+    <!-- ==========================
+         ESCOLHA DO MODO
+         ========================== -->
+
+    <div
+        id="menuModos"
+        class="menu-modos"
+    >
+
+        <h2>
+            Escolha o modo de jogo
+        </h2>
+
+
+        <button
+            class="botao-modo"
+            data-modo="clicar"
+            type="button"
+        >
+            🎯 Clicar
+        </button>
+
+
+        <button
+            class="botao-modo"
+            data-modo="digitar"
+            type="button"
+        >
+            ✍️ Digitar
+        </button>
+
+
+    </div>
+
+
+    <!-- ==========================
+         MODO PROVA
+         ========================== -->
+
+    <div class="card-prova">
+
+        <h2>
+            📝 Modo Prova
+        </h2>
+
+
+        <p>
+            Misture questões de todos os mapas disponíveis.
+        </p>
+
+
+        <label for="quantidadeProva">
+            Quantidade de questões:
+        </label>
+
+
+        <input
+            id="quantidadeProva"
+            type="number"
+            min="1"
+            value="10"
+        >
+
+
+        <label for="modoRespostaProva">
+            Modo de resposta:
+        </label>
+
+
+        <select id="modoRespostaProva">
+
+            <option value="clicar">
+                Clicar
+            </option>
+
+            <option value="digitar">
+                Digitar
+            </option>
+
+        </select>
+
+
+        <button
+            id="iniciarProva"
+            type="button"
+        >
+            Iniciar prova
+        </button>
+
+
+    </div>
+
+
+    <!-- ==========================
+         VOLTAR AO MENU PRINCIPAL
+         ========================== -->
+
+    <div class="acoes-atlas">
+
+        <button
+            id="voltarPrincipalJogo"
+            class="botao-acao"
+            type="button"
+        >
+            ← Voltar ao menu principal
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<!-- ==========================
+     JAVASCRIPT DO MENU
+     ========================== -->
+
+<script src="js/menu.js"></script>
+
+
+<!-- ==========================
+     BOTÃO VOLTAR
+     ========================== -->
+
+<script>
+
+    document
+        .getElementById(
+            "voltarPrincipalJogo"
+        )
+        .addEventListener(
+            "click",
+
+            function() {
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>
