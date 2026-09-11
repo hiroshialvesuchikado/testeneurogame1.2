@@ -1,10 +1,5 @@
 // ======================================================
-// MENU DO JOGO — NEUROGAME
-// ======================================================
-
-
-// ======================================================
-// ELEMENTOS
+// MENU DO JOGO
 // ======================================================
 
 const cardsMapas =
@@ -12,30 +7,25 @@ const cardsMapas =
         ".card-mapa"
     );
 
-
 const menuModos =
     document.getElementById(
         "menuModos"
     );
-
 
 const botoesModo =
     document.querySelectorAll(
         ".botao-modo"
     );
 
-
 const botaoIniciarProva =
     document.getElementById(
         "iniciarProva"
     );
 
-
 const quantidadeProva =
     document.getElementById(
         "quantidadeProva"
     );
-
 
 const modoRespostaProva =
     document.getElementById(
@@ -43,16 +33,12 @@ const modoRespostaProva =
     );
 
 
-// ======================================================
-// MAPA SELECIONADO
-// ======================================================
-
 let mapaSelecionado =
     null;
 
 
 // ======================================================
-// CARDS DOS MAPAS
+// ESCOLHER MAPA
 // ======================================================
 
 cardsMapas.forEach(
@@ -60,12 +46,7 @@ cardsMapas.forEach(
 
         card.addEventListener(
             "click",
-
             function() {
-
-                // --------------------------------------
-                // Pegar ID do mapa
-                // --------------------------------------
 
                 mapaSelecionado =
                     card.dataset.mapa;
@@ -77,43 +58,29 @@ cardsMapas.forEach(
                 );
 
 
-                // --------------------------------------
-                // Remover seleção dos outros cards
-                // --------------------------------------
-
                 cardsMapas.forEach(
                     function(outroCard) {
 
-                        outroCard
-                            .classList
-                            .remove(
-                                "selecionado"
-                            );
+                        outroCard.classList.remove(
+                            "selecionado"
+                        );
 
                     }
                 );
 
 
-                // --------------------------------------
-                // Selecionar card atual
-                // --------------------------------------
-
-                card
-                    .classList
-                    .add(
-                        "selecionado"
-                    );
+                card.classList.add(
+                    "selecionado"
+                );
 
 
-                // --------------------------------------
-                // Mostrar opções de modo
-                // --------------------------------------
+                if (menuModos) {
 
-                menuModos
-                    .classList
-                    .add(
+                    menuModos.classList.add(
                         "visivel"
                     );
+
+                }
 
             }
         );
@@ -123,7 +90,7 @@ cardsMapas.forEach(
 
 
 // ======================================================
-// MODOS DE JOGO
+// ESCOLHER MODO
 // ======================================================
 
 botoesModo.forEach(
@@ -131,12 +98,9 @@ botoesModo.forEach(
 
         botao.addEventListener(
             "click",
-
             function() {
 
-                if (
-                    !mapaSelecionado
-                ) {
+                if (!mapaSelecionado) {
 
                     alert(
                         "Escolha um mapa primeiro."
@@ -151,15 +115,18 @@ botoesModo.forEach(
                     botao.dataset.modo;
 
 
+                const destino =
+                    `./jogo.html?mapa=${encodeURIComponent(mapaSelecionado)}&modo=${encodeURIComponent(modo)}`;
+
+
                 console.log(
                     "Abrindo:",
-                    mapaSelecionado,
-                    modo
+                    destino
                 );
 
 
                 window.location.href =
-                    `jogo.html?mapa=${mapaSelecionado}&modo=${modo}`;
+                    destino;
 
             }
         );
@@ -172,17 +139,14 @@ botoesModo.forEach(
 // MODO PROVA
 // ======================================================
 
-if (
-    botaoIniciarProva
-) {
+if (botaoIniciarProva) {
 
     botaoIniciarProva.addEventListener(
         "click",
-
         function() {
 
             const quantidade =
-                parseInt(
+                Number(
                     quantidadeProva.value
                 );
 
@@ -192,12 +156,12 @@ if (
 
 
             if (
-                !quantidade ||
+                !Number.isInteger(quantidade) ||
                 quantidade < 1
             ) {
 
                 alert(
-                    "Informe uma quantidade válida de questões."
+                    "Digite uma quantidade válida de questões."
                 );
 
                 return;
@@ -206,7 +170,7 @@ if (
 
 
             window.location.href =
-                `prova.html?quantidade=${quantidade}&modo=${modo}`;
+                `./prova.html?quantidade=${quantidade}&modo=${encodeURIComponent(modo)}`;
 
         }
     );
