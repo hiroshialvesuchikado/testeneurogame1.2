@@ -7,7 +7,7 @@ const catalogoMapas = [
             "Telencéfalo — Vista Lateral",
 
         imagem:
-            "imagens/PalcoTelencefalo.png",
+            "./imagens/PalcoTelencefalo.png",
 
         estruturas:
             mapaTelencefaloLateral
@@ -20,7 +20,7 @@ const catalogoMapas = [
             "Telencéfalo — Vista Medial",
 
         imagem:
-            "imagens/PalcoTelencefaloMedial.png",
+            "./imagens/PalcoTelencefaloMedial.png",
 
         estruturas:
             mapaTelencefaloMedial
@@ -33,7 +33,7 @@ const catalogoMapas = [
             "Sulcos Telencéfalo — Vista Lateral",
 
         imagem:
-            "imagens/CadaverTelencefaloLateral.png",
+            "./imagens/CadaverTelencefaloLateral.png",
 
         estruturas:
             mapaCadaverSulcosTelencefaloLateral
