@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -12,10 +13,10 @@
 
     <title>NeuroGame — Atlas Interativo</title>
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -25,9 +26,15 @@
 
 <main class="game">
 
+
+    <!-- ==================================================
+         TÍTULO
+         ================================================== -->
+
     <h1>
         Atlas Interativo
     </h1>
+
 
 
     <!-- ==================================================
@@ -35,6 +42,7 @@
          ================================================== -->
 
     <section id="telaSelecaoAtlas">
+
 
         <h2>
             Escolha um mapa
@@ -44,6 +52,10 @@
         <div class="menu-mapas">
 
 
+            <!-- ==============================
+                 TELENCÉFALO LATERAL
+                 ============================== -->
+
             <button
                 class="card-atlas"
                 data-mapa="telencefalo-lateral"
@@ -51,7 +63,7 @@
             >
 
                 <img
-                    src="../imagens/PalcoTelencefalo.png"
+                    src="imagens/PalcoTelencefalo.png"
                     alt="Telencéfalo em vista lateral"
                 >
 
@@ -62,6 +74,11 @@
             </button>
 
 
+
+            <!-- ==============================
+                 TELENCÉFALO MEDIAL
+                 ============================== -->
+
             <button
                 class="card-atlas"
                 data-mapa="telencefalo-medial"
@@ -69,7 +86,7 @@
             >
 
                 <img
-                    src="../imagens/PalcoTelencefaloMedial.png"
+                    src="imagens/PalcoTelencefaloMedial.png"
                     alt="Telencéfalo em vista medial"
                 >
 
@@ -78,15 +95,22 @@
                 </span>
 
             </button>
-                        <button
+
+
+
+            <!-- ==============================
+                 CADÁVER — SULCOS LATERAIS
+                 ============================== -->
+
+            <button
                 class="card-atlas"
                 data-mapa="cadavertelencefalo-lateral"
                 type="button"
             >
 
                 <img
-                    src="../imagens/CadaverTelencefaloLateral.png"
-                    alt="Sulcos Telencéfalo em vista lateral"
+                    src="imagens/CadaverTelencefaloLateral.png"
+                    alt="Sulcos do telencéfalo em cadáver"
                 >
 
                 <span>
@@ -95,8 +119,14 @@
 
             </button>
 
+
         </div>
 
+
+
+        <!-- ==================================================
+             VOLTAR AO MENU PRINCIPAL
+             ================================================== -->
 
         <div class="acoes-atlas">
 
@@ -109,6 +139,7 @@
             </button>
 
         </div>
+
 
     </section>
 
@@ -123,6 +154,7 @@
         style="display: none;"
     >
 
+
         <h2 id="tituloMapaAtlas">
             Carregando mapa...
         </h2>
@@ -132,6 +164,11 @@
             Clique em uma estrutura para identificá-la.
         </p>
 
+
+
+        <!-- ==================================================
+             INFORMAÇÃO DA ESTRUTURA
+             ================================================== -->
 
         <div
             id="infoAtlas"
@@ -149,6 +186,11 @@
         </div>
 
 
+
+        <!-- ==================================================
+             IMAGEM + HOTSPOTS
+             ================================================== -->
+
         <div class="cerebro">
 
             <img
@@ -159,10 +201,16 @@
             <svg
                 id="camadaHotspots"
                 class="hotspots"
+                preserveAspectRatio="none"
             ></svg>
 
         </div>
 
+
+
+        <!-- ==================================================
+             BOTÕES
+             ================================================== -->
 
         <div class="acoes-atlas">
 
@@ -174,7 +222,17 @@
                 ← Escolher outro mapa
             </button>
 
+
+            <button
+                id="voltarPrincipalMapa"
+                class="botao-acao"
+                type="button"
+            >
+                🏠 Menu principal
+            </button>
+
         </div>
+
 
     </section>
 
@@ -185,15 +243,19 @@
 
 <!-- ==================================================
      ARQUIVOS DOS MAPAS
+
+     IMPORTANTE:
+     os arquivos dos mapas precisam ser carregados
+     ANTES do catalogoMapas.js
      ================================================== -->
 
-<script src="../Mapas/mapaPalcoTelencefalo.js"></script>
+<script src="Mapas/mapaPalcoTelencefalo.js"></script>
 
-<script src="../Mapas/mapaPalcoTelencefaloMedial.js"></script>
+<script src="Mapas/mapaPalcoTelencefaloMedial.js"></script>
 
-<script src="../Mapas/mapaCadaverSulcosTelencefaloLateral.js"></script>
+<script src="Mapas/mapaCadaverSulcosTelencefaloLateral.js"></script>
 
-<script src="../Mapas/catalogoMapas.js"></script>
+<script src="Mapas/catalogoMapas.js"></script>
 
 
 
@@ -204,8 +266,9 @@
 // ======================================================
 
 
+
 // ======================================================
-// 1. ELEMENTOS
+// 1. ELEMENTOS HTML
 // ======================================================
 
 const telaSelecaoAtlas =
@@ -256,9 +319,15 @@ const botaoTrocarMapa =
     );
 
 
+const botaoVoltarPrincipalMapa =
+    document.getElementById(
+        "voltarPrincipalMapa"
+    );
+
+
 
 // ======================================================
-// 2. LER PARÂMETRO DA URL
+// 2. LER O MAPA DA URL
 // ======================================================
 
 const parametros =
@@ -275,8 +344,7 @@ const idMapaSelecionado =
 
 
 // ======================================================
-// 3. SE NÃO EXISTIR MAPA NA URL
-//    MOSTRA MENU DO ATLAS
+// 3. DECIDIR QUAL TELA MOSTRAR
 // ======================================================
 
 if (!idMapaSelecionado) {
@@ -296,7 +364,7 @@ else {
 
 
 // ======================================================
-// 4. MOSTRAR SELEÇÃO
+// 4. MOSTRAR TELA DE SELEÇÃO
 // ======================================================
 
 function mostrarSelecaoAtlas() {
@@ -313,7 +381,7 @@ function mostrarSelecaoAtlas() {
 
 
 // ======================================================
-// 5. ABRIR ATLAS
+// 5. ABRIR MAPA DO ATLAS
 // ======================================================
 
 function abrirAtlas(
@@ -333,6 +401,10 @@ function abrirAtlas(
         );
 
 
+    // ==============================================
+    // MAPA NÃO ENCONTRADO
+    // ==============================================
+
     if (!mapa) {
 
         telaSelecaoAtlas.style.display =
@@ -347,10 +419,24 @@ function abrirAtlas(
             "Mapa não encontrado";
 
 
+        nomeEstruturaAtlas.textContent =
+            "Verifique o catálogo de mapas.";
+
+
+        console.error(
+            "Mapa não encontrado:",
+            idMapa
+        );
+
+
         return;
 
     }
 
+
+    // ==============================================
+    // MOSTRAR ATLAS
+    // ==============================================
 
     telaSelecaoAtlas.style.display =
         "none";
@@ -384,8 +470,20 @@ function carregarImagemAtlas(
     mapa
 ) {
 
+    console.log(
+        "Carregando imagem:",
+        mapa.imagem
+    );
+
+
     imagemAtlas.onload =
         function() {
+
+            console.log(
+                "Imagem carregada com sucesso:",
+                mapa.imagem
+            );
+
 
             criarEstruturasAtlas(
                 mapa
@@ -394,47 +492,56 @@ function carregarImagemAtlas(
         };
 
 
+    imagemAtlas.onerror =
+        function() {
+
+            console.error(
+                "Erro ao carregar imagem:",
+                mapa.imagem
+            );
+
+
+            tituloMapaAtlas.textContent =
+                mapa.titulo;
+
+
+            nomeEstruturaAtlas.textContent =
+                "Erro ao carregar a imagem.";
+
+        };
+
+
     /*
-        Como atlas.html está dentro da pasta Modos,
-        precisamos voltar uma pasta antes de acessar
-        a pasta imagens.
+        Como atlas.html está na RAIZ do projeto,
+        usamos diretamente o caminho do catálogo.
+
+        Exemplo:
+
+        imagens/PalcoTelencefalo.png
     */
 
-    let caminhoImagem =
-        mapa.imagem;
-
-
-    if (
-        !caminhoImagem.startsWith(
-            "../"
-        )
-    ) {
-
-        caminhoImagem =
-            "../" +
-            caminhoImagem;
-
-    }
-
-
     imagemAtlas.src =
-        caminhoImagem;
+        mapa.imagem;
 
 }
 
 
 
 // ======================================================
-// 7. CRIAR ESTRUTURAS DO ATLAS
+// 7. CRIAR HOTSPOTS DO ATLAS
 // ======================================================
 
 function criarEstruturasAtlas(
     mapa
 ) {
 
+    // Limpa estruturas antigas
+
     svgAtlas.innerHTML =
         "";
 
+
+    // Usa as dimensões naturais da imagem
 
     svgAtlas.setAttribute(
         "viewBox",
@@ -442,14 +549,19 @@ function criarEstruturasAtlas(
     );
 
 
+    // ==============================================
+    // CRIAR TODAS AS ESTRUTURAS
+    // ==============================================
+
     mapa.estruturas.forEach(
         function(estrutura) {
 
             let elemento;
 
 
+
             // ==========================================
-            // LINHA
+            // ESTRUTURA TIPO LINHA
             // ==========================================
 
             if (
@@ -470,11 +582,18 @@ function criarEstruturasAtlas(
                     "estrutura-atlas"
                 );
 
+
+                elemento.setAttribute(
+                    "fill",
+                    "none"
+                );
+
             }
 
 
+
             // ==========================================
-            // ÁREA
+            // ESTRUTURA TIPO ÁREA
             // ==========================================
 
             else {
@@ -495,11 +614,21 @@ function criarEstruturasAtlas(
             }
 
 
+
+            // ==========================================
+            // COORDENADAS
+            // ==========================================
+
             elemento.setAttribute(
                 "points",
                 estrutura.pontos
             );
 
+
+
+            // ==========================================
+            // DADOS DA ESTRUTURA
+            // ==========================================
 
             elemento.dataset.id =
                 estrutura.id;
@@ -514,10 +643,23 @@ function criarEstruturasAtlas(
                 "area";
 
 
+            elemento.dataset.info =
+                estrutura.info ||
+                "";
+
+
+
+            // ==========================================
+            // CLIQUE
+            // ==========================================
+
             elemento.addEventListener(
                 "click",
 
-                function() {
+                function(event) {
+
+                    event.stopPropagation();
+
 
                     selecionarEstruturaAtlas(
                         elemento
@@ -526,6 +668,11 @@ function criarEstruturasAtlas(
                 }
             );
 
+
+
+            // ==========================================
+            // ADICIONAR AO SVG
+            // ==========================================
 
             svgAtlas.appendChild(
                 elemento
@@ -554,6 +701,10 @@ function selecionarEstruturaAtlas(
     elemento
 ) {
 
+    // ==============================================
+    // REMOVER DESTAQUE ANTERIOR
+    // ==============================================
+
     const estruturas =
         document.querySelectorAll(
             ".estrutura-atlas"
@@ -571,20 +722,36 @@ function selecionarEstruturaAtlas(
     );
 
 
+
+    // ==============================================
+    // DESTACAR A ESTRUTURA CLICADA
+    // ==============================================
+
     elemento.classList.add(
         "selecionada-atlas"
     );
 
 
+
+    // ==============================================
+    // MOSTRAR NOME
+    // ==============================================
+
     nomeEstruturaAtlas.textContent =
         elemento.dataset.nome;
+
+
+    console.log(
+        "Estrutura selecionada:",
+        elemento.dataset.nome
+    );
 
 }
 
 
 
 // ======================================================
-// 9. CARDS DE SELEÇÃO DO ATLAS
+// 9. CARDS DA TELA DE SELEÇÃO
 // ======================================================
 
 const cardsAtlas =
@@ -603,6 +770,12 @@ cardsAtlas.forEach(
 
                 const mapa =
                     card.dataset.mapa;
+
+
+                console.log(
+                    "Abrindo atlas:",
+                    mapa
+                );
 
 
                 window.location.href =
@@ -638,6 +811,19 @@ botaoTrocarMapa.addEventListener(
 // ======================================================
 
 botaoVoltarPrincipal.addEventListener(
+    "click",
+
+    function() {
+
+        window.location.href =
+            "index.html";
+
+    }
+);
+
+
+
+botaoVoltarPrincipalMapa.addEventListener(
     "click",
 
     function() {
