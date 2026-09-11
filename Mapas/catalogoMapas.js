@@ -1,3 +1,7 @@
+// ======================================================
+// CATÁLOGO DE MAPAS — NEUROGAME
+// ======================================================
+
 const catalogoMapas = [
 
     {
@@ -40,3 +44,9 @@ const catalogoMapas = [
     }
 
 ];
+
+
+console.log(
+    "Catálogo carregado:",
+    catalogoMapas
+);
