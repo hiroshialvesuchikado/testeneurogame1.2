@@ -584,3 +584,8 @@ body {
         padding: 24px;
     }
 }
+
+.card-atlas {
+    text-decoration: none;
+    color: inherit;
+}
