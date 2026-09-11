@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,58 +10,602 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Teste Atlas</title>
+    <title>NeuroGame — Atlas Interativo</title>
 
     <link
         rel="stylesheet"
         href="./style.css"
     >
+
 </head>
 
 <body>
 
+
 <main class="game">
 
-    <h1>Atlas Interativo</h1>
 
-    <h2>
-        Teste de carregamento
-    </h2>
+    <!-- ==================================================
+         TÍTULO
+         ================================================== -->
 
-    <p>
-        Se você está vendo esta página,
-        o atlas.html está sendo carregado corretamente.
-    </p>
+    <h1>
+        Atlas Interativo
+    </h1>
 
-    <img
-        src="./imagens/PalcoTelencefalo.png"
-        alt="Telencéfalo"
-        style="max-width: 500px; width: 100%;"
+
+    <!-- ==================================================
+         TELA DE SELEÇÃO DOS MAPAS
+         ================================================== -->
+
+    <section id="telaSelecaoAtlas">
+
+        <h2>
+            Escolha um mapa
+        </h2>
+
+
+        <div class="menu-mapas">
+
+
+            <!-- TELENCÉFALO LATERAL -->
+
+            <a
+                class="card-atlas"
+                href="./atlas.html?mapa=telencefalo-lateral"
+            >
+
+                <img
+                    src="./imagens/PalcoTelencefalo.png"
+                    alt="Telencéfalo em vista lateral"
+                >
+
+                <span>
+                    Telencéfalo — Vista Lateral
+                </span>
+
+            </a>
+
+
+            <!-- TELENCÉFALO MEDIAL -->
+
+            <a
+                class="card-atlas"
+                href="./atlas.html?mapa=telencefalo-medial"
+            >
+
+                <img
+                    src="./imagens/PalcoTelencefaloMedial.png"
+                    alt="Telencéfalo em vista medial"
+                >
+
+                <span>
+                    Telencéfalo — Vista Medial
+                </span>
+
+            </a>
+
+
+            <!-- CADÁVER — SULCOS -->
+
+            <a
+                class="card-atlas"
+                href="./atlas.html?mapa=cadavertelencefalo-lateral"
+            >
+
+                <img
+                    src="./imagens/CadaverTelencefaloLateral.png"
+                    alt="Sulcos do telencéfalo em cadáver"
+                >
+
+                <span>
+                    Sulcos Telencéfalo — Vista Lateral
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- VOLTAR -->
+
+        <div class="acoes-atlas">
+
+            <a
+                href="./index.html"
+                class="botao-acao link-botao"
+            >
+                ← Voltar ao menu principal
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         TELA DO MAPA
+         ================================================== -->
+
+    <section
+        id="telaMapaAtlas"
+        style="display: none;"
     >
 
-    <p>
-        Mapa escolhido:
-        <strong id="mapaEscolhido"></strong>
-    </p>
+        <h2 id="tituloMapaAtlas">
+            Carregando mapa...
+        </h2>
+
+
+        <p>
+            Clique em uma estrutura para identificá-la.
+        </p>
+
+
+        <div
+            id="infoAtlas"
+            class="info-atlas"
+        >
+
+            <span>
+                Estrutura selecionada:
+            </span>
+
+            <strong id="nomeEstruturaAtlas">
+                Nenhuma
+            </strong>
+
+        </div>
+
+
+        <!-- IMAGEM + SVG -->
+
+        <div class="cerebro">
+
+            <img
+                id="imagemAnatomica"
+                alt="Imagem anatômica"
+            >
+
+            <svg
+                id="camadaHotspots"
+                class="hotspots"
+                preserveAspectRatio="none"
+            ></svg>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+
+        <div class="acoes-atlas">
+
+            <a
+                href="./atlas.html"
+                class="botao-acao link-botao"
+            >
+                ← Escolher outro mapa
+            </a>
+
+
+            <a
+                href="./index.html"
+                class="botao-acao link-botao"
+            >
+                🏠 Menu principal
+            </a>
+
+        </div>
+
+    </section>
+
 
 </main>
 
+
+<!-- ==================================================
+     MAPAS
+     ================================================== -->
+
+<script src="./Mapas/mapaPalcoTelencefalo.js"></script>
+
+<script src="./Mapas/mapaPalcoTelencefaloMedial.js"></script>
+
+<script src="./Mapas/mapaCadaverSulcosTelencefaloLateral.js"></script>
+
+<script src="./Mapas/catalogoMapas.js"></script>
+
+
 <script>
 
-    const parametros =
-        new URLSearchParams(
-            window.location.search
-        );
+// ======================================================
+// ATLAS INTERATIVO
+// ======================================================
+
+
+// ======================================================
+// ELEMENTOS
+// ======================================================
+
+const telaSelecaoAtlas =
+    document.getElementById(
+        "telaSelecaoAtlas"
+    );
+
+
+const telaMapaAtlas =
+    document.getElementById(
+        "telaMapaAtlas"
+    );
+
+
+const tituloMapaAtlas =
+    document.getElementById(
+        "tituloMapaAtlas"
+    );
+
+
+const nomeEstruturaAtlas =
+    document.getElementById(
+        "nomeEstruturaAtlas"
+    );
+
+
+const imagemAtlas =
+    document.getElementById(
+        "imagemAnatomica"
+    );
+
+
+const svgAtlas =
+    document.getElementById(
+        "camadaHotspots"
+    );
+
+
+// ======================================================
+// LER MAPA DA URL
+// ======================================================
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const idMapaSelecionado =
+    parametros.get(
+        "mapa"
+    );
+
+
+// ======================================================
+// DECIDIR QUAL TELA MOSTRAR
+// ======================================================
+
+if (!idMapaSelecionado) {
+
+    telaSelecaoAtlas.style.display =
+        "block";
+
+
+    telaMapaAtlas.style.display =
+        "none";
+
+}
+
+else {
+
+    abrirAtlas(
+        idMapaSelecionado
+    );
+
+}
+
+
+// ======================================================
+// ABRIR ATLAS
+// ======================================================
+
+function abrirAtlas(
+    idMapa
+) {
 
     const mapa =
-        parametros.get("mapa");
+        catalogoMapas.find(
+            function(item) {
 
-    document.getElementById(
-        "mapaEscolhido"
-    ).textContent =
-        mapa || "nenhum";
+                return (
+                    item.id ===
+                    idMapa
+                );
+
+            }
+        );
+
+
+    if (!mapa) {
+
+        telaSelecaoAtlas.style.display =
+            "none";
+
+
+        telaMapaAtlas.style.display =
+            "block";
+
+
+        tituloMapaAtlas.textContent =
+            "Mapa não encontrado";
+
+
+        nomeEstruturaAtlas.textContent =
+            "Verifique o catálogo de mapas.";
+
+
+        console.error(
+            "Mapa não encontrado:",
+            idMapa
+        );
+
+
+        return;
+
+    }
+
+
+    telaSelecaoAtlas.style.display =
+        "none";
+
+
+    telaMapaAtlas.style.display =
+        "block";
+
+
+    tituloMapaAtlas.textContent =
+        mapa.titulo;
+
+
+    nomeEstruturaAtlas.textContent =
+        "Nenhuma";
+
+
+    carregarImagemAtlas(
+        mapa
+    );
+
+}
+
+
+// ======================================================
+// CARREGAR IMAGEM
+// ======================================================
+
+function carregarImagemAtlas(
+    mapa
+) {
+
+    console.log(
+        "Carregando imagem:",
+        mapa.imagem
+    );
+
+
+    imagemAtlas.onload =
+        function() {
+
+            console.log(
+                "Imagem carregada com sucesso:",
+                mapa.imagem
+            );
+
+
+            criarEstruturasAtlas(
+                mapa
+            );
+
+        };
+
+
+    imagemAtlas.onerror =
+        function() {
+
+            console.error(
+                "Erro ao carregar imagem:",
+                mapa.imagem
+            );
+
+
+            nomeEstruturaAtlas.textContent =
+                "Erro ao carregar a imagem.";
+
+        };
+
+
+    imagemAtlas.src =
+        mapa.imagem;
+
+}
+
+
+// ======================================================
+// CRIAR ESTRUTURAS
+// ======================================================
+
+function criarEstruturasAtlas(
+    mapa
+) {
+
+    svgAtlas.innerHTML =
+        "";
+
+
+    svgAtlas.setAttribute(
+        "viewBox",
+        `0 0 ${imagemAtlas.naturalWidth} ${imagemAtlas.naturalHeight}`
+    );
+
+
+    mapa.estruturas.forEach(
+        function(estrutura) {
+
+            let elemento;
+
+
+            // ==========================================
+            // LINHA
+            // ==========================================
+
+            if (
+                estrutura.tipo ===
+                "linha"
+            ) {
+
+                elemento =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "polyline"
+                    );
+
+
+                elemento.classList.add(
+                    "estrutura",
+                    "estrutura-linha",
+                    "estrutura-atlas"
+                );
+
+
+                elemento.setAttribute(
+                    "fill",
+                    "none"
+                );
+
+            }
+
+
+            // ==========================================
+            // ÁREA
+            // ==========================================
+
+            else {
+
+                elemento =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "polygon"
+                    );
+
+
+                elemento.classList.add(
+                    "estrutura",
+                    "estrutura-area",
+                    "estrutura-atlas"
+                );
+
+            }
+
+
+            elemento.setAttribute(
+                "points",
+                estrutura.pontos
+            );
+
+
+            elemento.dataset.id =
+                estrutura.id;
+
+
+            elemento.dataset.nome =
+                estrutura.nome;
+
+
+            elemento.dataset.tipo =
+                estrutura.tipo ||
+                "area";
+
+
+            elemento.dataset.info =
+                estrutura.info ||
+                "";
+
+
+            elemento.addEventListener(
+                "click",
+
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    selecionarEstruturaAtlas(
+                        elemento
+                    );
+
+                }
+            );
+
+
+            svgAtlas.appendChild(
+                elemento
+            );
+
+        }
+    );
+
+
+    console.log(
+        "Estruturas criadas:",
+        document.querySelectorAll(
+            ".estrutura-atlas"
+        ).length
+    );
+
+}
+
+
+// ======================================================
+// SELECIONAR ESTRUTURA
+// ======================================================
+
+function selecionarEstruturaAtlas(
+    elemento
+) {
+
+    const estruturas =
+        document.querySelectorAll(
+            ".estrutura-atlas"
+        );
+
+
+    estruturas.forEach(
+        function(estrutura) {
+
+            estrutura.classList.remove(
+                "selecionada-atlas"
+            );
+
+        }
+    );
+
+
+    elemento.classList.add(
+        "selecionada-atlas"
+    );
+
+
+    nomeEstruturaAtlas.textContent =
+        elemento.dataset.nome;
+
+
+    console.log(
+        "Estrutura selecionada:",
+        elemento.dataset.nome
+    );
+
+}
 
 </script>
+
 
 </body>
 
